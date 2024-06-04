@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
-import { User } from '../users/entities/users.entity';
+import { User } from '../users/entities/user.entity';
 
 import { AuthService } from './auth.service';
 

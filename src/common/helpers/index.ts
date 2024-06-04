@@ -1,12 +1,13 @@
 import { HttpStatus } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 export * from './string';
 
-export const nairaToKobo = (naira: number): number => {
-  return naira * 100;
+export const amountToLowestForm = (amount: number): number => {
+  return amount * 100;
 };
 
-export const koboToNaira = (kobo: number): number => {
-  return kobo / 100;
+export const amountToHighestForm = (amount: number): number => {
+  return amount / 100;
 };
 
 export const appendSignToPhoneNumber = (phoneNumber) =>
@@ -14,6 +15,8 @@ export const appendSignToPhoneNumber = (phoneNumber) =>
 
 export const generateTransactionReference = (): number =>
   Number(`${Date.now().toString().slice(0, 18)}`);
+
+export const generateSessionId = (): string => uuidv4();
 
 export const catchErrorMessage = (
   error: any,

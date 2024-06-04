@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindManyOptions, FindOneOptions, ILike, Repository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
 
-import { User } from './entities/users.entity';
+import { User } from './entities/user.entity';
 
 import {
   PageDto,
@@ -13,7 +13,7 @@ import {
 } from '../common/pagination/dtos/index';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   private readonly logger: Logger;
 
   constructor(
@@ -21,7 +21,7 @@ export class UsersService {
     private readonly usersRepo: Repository<User>,
     private readonly config: ConfigService,
   ) {
-    this.logger = new Logger(UsersService.name);
+    this.logger = new Logger(UserService.name);
   }
 
   async find(options: FindManyOptions<User>): Promise<User[]> {
@@ -60,10 +60,6 @@ export class UsersService {
         ];
       }
 
-      findOptions.where = {
-        ...findOptions.where,
-      };
-
       const [res, total] = await this.usersRepo.findAndCount(findOptions);
 
       const pageMetaDto = new PageMetaDto({
@@ -88,7 +84,7 @@ export class UsersService {
   }
 
   async findOneById(id: string, relations?: string[]): Promise<User> {
-    return await this.usersRepo.findOne({
+    return await this.usersRepo.findOneOrFail({
       where: { id, isActive: true },
       relations: relations || [],
     });

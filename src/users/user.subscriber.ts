@@ -7,15 +7,15 @@ import {
   UpdateEvent,
 } from 'typeorm';
 
-import { User } from './entities/users.entity';
-import { UsersService } from './users.service';
+import { User } from './entities/user.entity';
+import { UserService } from './user.service';
 import * as bcrypt from 'bcryptjs';
 @Injectable()
 @EventSubscriber()
-export class UsersSubscriber implements EntitySubscriberInterface<User> {
+export class UserSubscriber implements EntitySubscriberInterface<User> {
   constructor(
     private readonly dataSource: DataSource,
-    private readonly usersService: UsersService,
+    private readonly userService: UserService,
   ) {
     this.dataSource.subscribers.push(this);
   }

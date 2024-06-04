@@ -11,8 +11,9 @@ import { isPhoneNumber } from 'class-validator';
 
 import { Repository, DataSource } from 'typeorm';
 
-import { User } from '../users/entities/users.entity';
-import { UsersService } from '../users/users.service';
+import { User } from '../users/entities/user.entity';
+import { Wallet } from '../wallet/entities/wallet.entity';
+import { UserService } from '../users/user.service';
 
 import {
   SignUpInput,
@@ -31,9 +32,11 @@ import {
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly usersService: UsersService,
+    private readonly usersService: UserService,
     @InjectRepository(User)
     private readonly usersRepo: Repository<User>,
+    @InjectRepository(Wallet)
+    private readonly walletsRepo: Repository<Wallet>,
     private readonly config: ConfigService,
     private dataSource: DataSource,
   ) {}
@@ -102,6 +105,10 @@ export class AuthService {
       u.email = lowercaseEmail;
 
       user = await queryRunner.manager.save(User, u);
+
+      const w = new Wallet();
+      Object.assign(w, { user });
+      await queryRunner.manager.save(Wallet, w);
       await queryRunner.commitTransaction();
       return user;
     } catch (error) {
@@ -124,7 +131,7 @@ export class AuthService {
             isActive: true,
           },
         },
-        [],
+        ['wallet'],
       );
 
       if (!user) {
@@ -161,7 +168,10 @@ export class AuthService {
 
   async me({ id }): Promise<User> {
     try {
-      const user = await this.usersService.findOneById(id, []);
+      const user = await this.usersService.findOneById(id, [
+        'wallet',
+        'transactions',
+      ]);
       return user;
     } catch (error) {
       const { message, statusCode } = this.catchErrorMessage(error);

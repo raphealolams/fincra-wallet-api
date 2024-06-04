@@ -10,7 +10,7 @@ import {
   MinLength,
 } from 'class-validator';
 
-import { User } from '../../users/entities/users.entity';
+import { User } from '../../users/entities/user.entity';
 
 import { StringHelpers } from '../../common/helpers/index';
 
