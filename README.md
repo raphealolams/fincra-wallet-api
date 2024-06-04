@@ -610,22 +610,7 @@ Install Dependency
 
 # Advanced Requirements
 
-### The current system can support 100,000 daily active users. How do you design a new system to support 1,000,000 daily active users?
-
-**This issue can be solved with partial micro services**
-**We can still have a single DB or a DB attached to each micro services, but you'll need to deploy different service to deliver values to your users**
-
-- _Example, Ordering Service and Product Service_
-- _Ordering for payment and carting, and product for getting product info_
-
-![Picture](https://res.cloudinary.com/ajilore/image/upload/v1558819765/microservices.png)
-
-### A half of the daily active users comes from United States. How do you design a new system to handle this case?
-
-**For this, you'll only have to get a Multi-AZ Deployment for your DB.**
-**So you can have sharding in multiple regions**
-**This will make DB Queries faster which is the most important one.**
-**AWS has that at the moment**
+### The
 
 # Author
 
