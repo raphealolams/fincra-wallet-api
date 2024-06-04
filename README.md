@@ -4,7 +4,7 @@ documentation for Fincra Wallet API.
 
 # Table of Contents
 
-- [System Architecture](#system-architecture)
+- [Postman Docs](#postman-docs)
 - [Prerequisites](#prerequisites)
 - [Installing](#installing)
 - [Running The App](#running-the-app)
@@ -26,9 +26,9 @@ documentation for Fincra Wallet API.
 - [Advanced Requirements](#advanced-requirements)
 - [Author](#author)
 
-# System Architecture
+# Postman Docs
 
-![Picture]()
+[link](https://documenter.getpostman.com/view/7484575/2sA3Qy5UgN)
 
 # Prerequisites
 
@@ -72,8 +72,6 @@ Install Dependency
 ```
     npm test
 ```
-
-# Error Documentation
 
 # API Endpoint
 
