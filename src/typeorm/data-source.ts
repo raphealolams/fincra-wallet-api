@@ -18,4 +18,10 @@ export default new DataSource({
   namingStrategy: new TypeOrmNamingStrategy(),
   logging: env.get('DATABASE_LOGGING'),
   logger: 'advanced-console',
+  ssl: false,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
 });

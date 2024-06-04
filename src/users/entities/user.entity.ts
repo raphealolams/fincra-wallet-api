@@ -84,6 +84,6 @@ export class User {
   }
 
   toJSON() {
-    return { ...this, password: undefined, mfaSecret: undefined };
+    return { ...this, password: undefined, pin: undefined };
   }
 }

@@ -20,6 +20,12 @@ import { Module } from '@nestjs/common';
         namingStrategy: new TypeOrmNamingStrategy(),
         autoLoadEntities: true,
         logging: false,
+        ssl: false,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
       }),
     }),
   ],
