@@ -8,6 +8,7 @@ documentation for Fincra Wallet API.
   - [Validations](#validations)
   - [ERD](#erd)
   - [Test Accounts](#test-accounts)
+  - [URL](#url)
 - [Postman Docs](#postman-docs)
 - [Prerequisites](#prerequisites)
 - [Installing](#installing)
@@ -47,6 +48,10 @@ _The transfer functionality enables fund transfer between two users within the s
 
 - **User 1:**: email (raphealolams@gmail.com) Password (wemove@1) Pin (2265)
 - **User 2:**: email (raphealolams++@gmail.com) Password (wemove@1)
+
+## Url
+
+[link](https://fincra-wallet-api-mhg6.onrender.com)
 
 # Postman Docs
 
