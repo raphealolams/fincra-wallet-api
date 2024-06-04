@@ -85,4 +85,13 @@ export class Transaction {
 
   @VersionColumn()
   readonly version: number;
+
+  toJSON() {
+    return {
+      ...this,
+      balanceAfterTransaction: +this.balanceAfterTransaction / 100,
+      balanceBeforeTransaction: +this.balanceBeforeTransaction / 100,
+      amount: +this.amount / 100,
+    };
+  }
 }

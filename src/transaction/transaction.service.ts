@@ -123,6 +123,22 @@ export class TransactionService {
         ...meta,
       };
     } catch (error) {
+      console.log(error);
+      const { message, statusCode } = this.catchErrorMessage(error);
+      throw new HttpException(message, statusCode);
+    }
+  }
+
+  async transactionHistory(id, user: User): Promise<Transaction> {
+    try {
+      return await this.transactionRepo.findOneOrFail({
+        where: {
+          id,
+          user: { id: user.id },
+        },
+      });
+    } catch (error) {
+      console.log(error);
       const { message, statusCode } = this.catchErrorMessage(error);
       throw new HttpException(message, statusCode);
     }

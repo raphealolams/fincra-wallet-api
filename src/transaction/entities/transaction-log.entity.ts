@@ -12,7 +12,6 @@ import {
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { TransactionStatus } from '../../common/enums/index.enum';
-
 @Entity()
 export class TransactionLog {
   @PrimaryGeneratedColumn('uuid')
@@ -61,4 +60,11 @@ export class TransactionLog {
 
   @VersionColumn()
   readonly version: number;
+
+  toJSON() {
+    return {
+      ...this,
+      amount: +this.amount / 100,
+    };
+  }
 }

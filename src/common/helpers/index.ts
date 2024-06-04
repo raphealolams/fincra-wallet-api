@@ -1,5 +1,6 @@
 import { HttpStatus } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
+import { randomBytes } from 'crypto';
 export * from './string';
 
 export const amountToLowestForm = (amount: number): number => {
@@ -13,8 +14,8 @@ export const amountToHighestForm = (amount: number): number => {
 export const appendSignToPhoneNumber = (phoneNumber) =>
   phoneNumber.indexOf('+', '0') !== -1 ? `${phoneNumber}` : `+${phoneNumber}`;
 
-export const generateTransactionReference = (): number =>
-  Number(`${Date.now().toString().slice(0, 18)}`);
+export const generateTransactionReference = (): string =>
+  randomBytes(16).toString('hex');
 
 export const generateSessionId = (): string => uuidv4();
 

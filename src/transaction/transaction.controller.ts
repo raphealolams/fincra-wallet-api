@@ -6,6 +6,7 @@ import {
   UseGuards,
   UseFilters,
   UseInterceptors,
+  Param,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
@@ -21,6 +22,7 @@ import { RolesGuard } from '../common/guards/roles.guard.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { TransformInterceptor } from '../common/interceptors/transform.interceptor';
 import { HttpExceptionFilter } from '../common/filters/http-exception.filter';
+import { Transaction } from './entities/transaction.entity';
 
 @Controller('transactions')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -39,5 +41,14 @@ export class TransactionController {
     @LoggedInUser() user: User,
   ): Promise<PaginationResponse> {
     return this.transactionService.transactionHistories(query, user);
+  }
+
+  @Get('/:id')
+  @Version('1')
+  async getOneTransactions(
+    @Param('id') id: string,
+    @LoggedInUser() user: User,
+  ): Promise<Transaction> {
+    return this.transactionService.transactionHistory(id, user);
   }
 }

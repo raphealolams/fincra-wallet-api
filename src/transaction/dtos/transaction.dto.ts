@@ -1,6 +1,9 @@
 import { Type } from 'class-transformer';
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { TransactionType } from '../../common/enums/transactions.enum';
+import {
+  TransactionType,
+  TransactionStatus,
+} from '../../common/enums/transactions.enum';
 import { User } from '../../users/entities/user.entity';
 export class CreateTransactionDto {
   @IsNotEmpty()
@@ -27,4 +30,9 @@ export class CreateTransactionDto {
 
   @IsNotEmpty()
   reference: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @IsEnum(TransactionStatus)
+  status: TransactionStatus;
 }

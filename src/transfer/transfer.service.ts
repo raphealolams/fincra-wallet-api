@@ -5,11 +5,12 @@ import { UserService } from '../users/user.service';
 import { TransactionService } from '../transaction/transaction.service';
 import { WalletService } from '../wallet/wallet.service';
 import { User } from '../users/entities/user.entity';
-import { TransactionType } from '../common/enums/index.enum';
+import { TransactionType, TransactionStatus } from '../common/enums/index.enum';
 
 import {
   amountToLowestForm,
   generateSessionId,
+  generateTransactionReference,
   catchErrorMessage,
 } from '../common/helpers/index';
 
@@ -94,7 +95,8 @@ export class TransferService {
           amount: +amount,
           user: user,
           sessionId,
-          reference: '',
+          reference: generateTransactionReference(),
+          status: TransactionStatus.SUCCESS,
         },
         queryRunner,
       );
@@ -110,7 +112,8 @@ export class TransferService {
           amount: +amount,
           user: recipient,
           sessionId,
-          reference: '',
+          reference: generateTransactionReference(),
+          status: TransactionStatus.SUCCESS,
         },
         queryRunner,
       );
