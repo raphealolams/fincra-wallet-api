@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   Version,
   HttpCode,
+  Patch,
 } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 
@@ -22,7 +23,11 @@ import { LoggedInUser } from '../common/decorators/logged-in-user.decorator';
 import { HttpExceptionFilter } from '../common/filters/http-exception.filter';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard';
 import { TransformInterceptor } from '../common/interceptors/transform.interceptor';
+import { Roles } from '../common/decorators/roles.decorator';
+import { RolesGuard } from '../common/guards/roles.guard.guard';
+import { UserRole } from '../common/enums/index.enum';
 
+import { SetWalletPinDto, ChangeWalletPinDto } from '../wallet/dto/index.dto';
 @Controller('auth')
 @UseFilters(HttpExceptionFilter)
 @UseInterceptors(TransformInterceptor)
@@ -57,5 +62,31 @@ export class AuthController {
   @ApiBearerAuth()
   async me(@LoggedInUser() user: User): Promise<User> {
     return await this.authService.me(user);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.USER)
+  @Patch('set-pin')
+  @Version('1')
+  async setPin(
+    @Body() input: SetWalletPinDto,
+    @LoggedInUser() user: User,
+  ): Promise<any> {
+    const users = await this.authService.setPin(input, user);
+    return users;
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.USER)
+  @Patch('change-pin')
+  @Version('1')
+  async changePin(
+    @Body() input: ChangeWalletPinDto,
+    @LoggedInUser() user: User,
+  ): Promise<any> {
+    const users = await this.authService.changePin(input, user);
+    return users;
   }
 }

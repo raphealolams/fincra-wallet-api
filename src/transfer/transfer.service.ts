@@ -42,10 +42,9 @@ export class TransferService {
           'You are not allowed to make a transfer to yourself.',
         );
 
-      const isValidPin = User.comparePasswords(
-        payload.idempotencyKey,
-        user.pin,
-      );
+      if (!user.pin) throw new BadRequestException('Pin Setup required!');
+
+      const isValidPin = User.comparePasswords(`${payload.pin}`, user.pin);
 
       if (!isValidPin) throw new BadRequestException('Incorrect Pin!');
 

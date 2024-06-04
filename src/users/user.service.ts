@@ -100,7 +100,12 @@ export class UserService {
     });
   }
 
-  async update(where, dataToUpdate) {
-    await this.usersRepo.update(where, dataToUpdate);
+  async update(where: any, dataToUpdate) {
+    await this.usersRepo.update(
+      {
+        ...where,
+      },
+      dataToUpdate,
+    );
   }
 }

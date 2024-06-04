@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsString,
   IsNotEmpty,
+  Min,
 } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
@@ -14,6 +15,12 @@ export class InitiateTransferDto {
   @IsString()
   @IsNotEmpty()
   idempotencyKey: string;
+
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  @Min(4)
+  pin: number;
 
   @IsNotEmpty()
   @IsUUID()

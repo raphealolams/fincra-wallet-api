@@ -37,7 +37,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
     if (event.entity.pin) {
       const saltRounds = 10;
       const salt = bcrypt.genSaltSync(saltRounds);
-      event.entity.pin = bcrypt.hashSync(event.entity.pin, salt);
+      event.entity.pin = bcrypt.hashSync(`${event.entity.pin}`, salt);
     }
   }
 
@@ -50,7 +50,7 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
     if (event.entity.pin) {
       const saltRounds = 10;
       const salt = bcrypt.genSaltSync(saltRounds);
-      event.entity.pin = bcrypt.hashSync(event.entity.pin, salt);
+      event.entity.pin = bcrypt.hashSync(`${event.entity.pin}`, salt);
     }
   }
 }

@@ -13,6 +13,7 @@ function removeSensitiveData(body) {
     'bvn',
     'confirmPassword',
     'currentPassword',
+    'confirmPin',
   ];
   const newBody = {};
   Object.keys(body).forEach((item) => {

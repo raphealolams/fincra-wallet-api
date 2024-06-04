@@ -28,6 +28,8 @@ import {
   StringHelpers,
 } from '../common/helpers/index';
 
+import { SetWalletPinDto, ChangeWalletPinDto } from '../wallet/dto/index.dto';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -180,19 +182,20 @@ export class AuthService {
     }
   }
 
-  async setPin({ pin }, { id }: User): Promise<any> {
+  async setPin({ pin }: SetWalletPinDto, { id }: User): Promise<any> {
     try {
-      await this.usersService.update({ user: { id } }, { pin });
+      await this.usersService.update({ id, isActive: true }, { pin });
       return {};
     } catch (error) {
+      console.log(error);
       const { message, statusCode } = this.catchErrorMessage(error);
       throw new HttpException(message, statusCode);
     }
   }
 
-  async changePin({ pin }, { id }: User): Promise<any> {
+  async changePin({ pin }: ChangeWalletPinDto, { id }: User): Promise<any> {
     try {
-      await this.usersService.update({ user: { id } }, { pin });
+      await this.usersService.update({ id, isActive: true }, { pin });
       return {};
     } catch (error) {
       const { message, statusCode } = this.catchErrorMessage(error);
