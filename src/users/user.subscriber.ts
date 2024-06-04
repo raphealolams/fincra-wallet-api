@@ -33,6 +33,12 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
       const salt = bcrypt.genSaltSync(saltRounds);
       event.entity.password = bcrypt.hashSync(event.entity.password, salt);
     }
+
+    if (event.entity.pin) {
+      const saltRounds = 10;
+      const salt = bcrypt.genSaltSync(saltRounds);
+      event.entity.pin = bcrypt.hashSync(event.entity.pin, salt);
+    }
   }
 
   async beforeUpdate(event: UpdateEvent<User>) {
@@ -40,6 +46,11 @@ export class UserSubscriber implements EntitySubscriberInterface<User> {
       const saltRounds = 10;
       const salt = bcrypt.genSaltSync(saltRounds);
       event.entity.password = bcrypt.hashSync(event.entity.password, salt);
+    }
+    if (event.entity.pin) {
+      const saltRounds = 10;
+      const salt = bcrypt.genSaltSync(saltRounds);
+      event.entity.pin = bcrypt.hashSync(event.entity.pin, salt);
     }
   }
 }

@@ -99,4 +99,8 @@ export class UserService {
       relations: relations || [],
     });
   }
+
+  async update(where, dataToUpdate) {
+    await this.usersRepo.update(where, dataToUpdate);
+  }
 }

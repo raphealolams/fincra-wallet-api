@@ -23,7 +23,6 @@ import { PageOptionsDto, PaginationResponse } from '../common/pagination/dtos';
 
 @Controller('wallets')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(UserRole.SUPER_ADMIN)
 @UseFilters(HttpExceptionFilter)
 @UseInterceptors(TransformInterceptor)
 @ApiTags('wallets')
@@ -32,6 +31,7 @@ export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
   @ApiBearerAuth()
+  @Roles(UserRole.SUPER_ADMIN)
   @Get()
   @Version('1')
   async findAll(

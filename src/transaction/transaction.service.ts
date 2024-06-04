@@ -45,16 +45,13 @@ export class TransactionService {
       });
       await queryRunner.manager.insert(TransactionLog, log);
     } catch (error) {
-      console.log(error);
       /**
-       * catch for idempotency error so I can send a custom error message
+       * catch for idempotency error
        */
-      if (error.code === 11000) {
-        if (error.keyPattern && error.keyPattern.idempotencyKey) {
-          throw new BadRequestException(
-            'Duplicate Transaction: idempotency key already exist',
-          );
-        }
+      if (error.code === '23505') {
+        throw new BadRequestException(
+          'Duplicate Transaction: idempotency key already exist',
+        );
       }
       const { message, statusCode } = this.catchErrorMessage(error);
       throw new HttpException(message, statusCode);

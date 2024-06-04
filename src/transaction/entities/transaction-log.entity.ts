@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
   VersionColumn,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { TransactionStatus } from '../../common/enums/index.enum';
@@ -28,7 +28,7 @@ export class TransactionLog {
   })
   amount: number;
 
-  @OneToOne(() => User, (user) => user)
+  @ManyToOne(() => User, (user) => user)
   @JoinColumn()
   recipient: User;
 
@@ -45,7 +45,7 @@ export class TransactionLog {
   @Column({ nullable: true })
   sessionId: string;
 
-  @OneToOne(() => User, (user) => user)
+  @ManyToOne(() => User, (user) => user)
   @JoinColumn()
   sender: User;
 

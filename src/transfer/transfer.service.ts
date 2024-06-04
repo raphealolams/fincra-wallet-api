@@ -42,6 +42,13 @@ export class TransferService {
           'You are not allowed to make a transfer to yourself.',
         );
 
+      const isValidPin = User.comparePasswords(
+        payload.idempotencyKey,
+        user.pin,
+      );
+
+      if (!isValidPin) throw new BadRequestException('Incorrect Pin!');
+
       /**
        * idempotency:
        *
@@ -128,10 +135,7 @@ export class TransferService {
 
       await queryRunner.commitTransaction();
 
-      return {
-        status: 'success',
-        message: 'Wallet transfer processed successfully',
-      };
+      return;
     } catch (error) {
       console.log(error);
       await queryRunner.rollbackTransaction();

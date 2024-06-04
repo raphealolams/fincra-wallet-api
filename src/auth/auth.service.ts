@@ -162,7 +162,8 @@ export class AuthService {
       if (error.name === 'TokenExpiredError') {
         throw new UnauthorizedException('Invalid auth token - Token expired.');
       }
-      throw error;
+      const { message, statusCode } = this.catchErrorMessage(error);
+      throw new HttpException(message, statusCode);
     }
   }
 
@@ -171,11 +172,29 @@ export class AuthService {
       const user = await this.usersService.findOneById(id, [
         'wallet',
         'transactions',
-        'transactions.log',
       ]);
       return user;
     } catch (error) {
-      console.log(error);
+      const { message, statusCode } = this.catchErrorMessage(error);
+      throw new HttpException(message, statusCode);
+    }
+  }
+
+  async setPin({ pin }, { id }: User): Promise<any> {
+    try {
+      await this.usersService.update({ user: { id } }, { pin });
+      return {};
+    } catch (error) {
+      const { message, statusCode } = this.catchErrorMessage(error);
+      throw new HttpException(message, statusCode);
+    }
+  }
+
+  async changePin({ pin }, { id }: User): Promise<any> {
+    try {
+      await this.usersService.update({ user: { id } }, { pin });
+      return {};
+    } catch (error) {
       const { message, statusCode } = this.catchErrorMessage(error);
       throw new HttpException(message, statusCode);
     }
