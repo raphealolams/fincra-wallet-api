@@ -6,7 +6,7 @@ documentation for Fincra Wallet API.
 
 - [Overview](#overview)
   - [Validations](#validations)
-  - [Production Mode](#production-mode)
+  - [ERD](#erd)
 - [Postman Docs](#postman-docs)
 - [Prerequisites](#prerequisites)
 - [Installing](#installing)
@@ -37,6 +37,10 @@ _The transfer functionality enables fund transfer between two users within the s
 - **Avoid Self-Transfer:**: Transfers to the self is prohibited.
 - **Insufficient Balance:**: The system verifies the senders account has a balance sufficient enough to cover the transaction
 - **Duplicate transaction:**: Idempotency key was introduced to prevent duplicate transactions and ensure idempotent behavior.
+
+## ERD
+
+![picture](https://res.cloudinary.com/ajilore/image/upload/f_auto,q_auto/umjjd68uvoyjrs0wkn80)
 
 # Postman Docs
 
