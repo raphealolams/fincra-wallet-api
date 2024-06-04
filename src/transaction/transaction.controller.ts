@@ -48,7 +48,7 @@ export class TransactionController {
   async getOneTransactions(
     @Param('id') id: string,
     @LoggedInUser() user: User,
-  ): Promise<Transaction> {
+  ): Promise<Transaction | any> {
     return this.transactionService.transactionHistory(id, user);
   }
 }

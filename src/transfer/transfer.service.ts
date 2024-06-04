@@ -103,6 +103,7 @@ export class TransferService {
           sessionId,
           reference: generateTransactionReference(),
           status: TransactionStatus.SUCCESS,
+          narration: payload.narration,
         },
         queryRunner,
       );
@@ -120,6 +121,7 @@ export class TransferService {
           sessionId,
           reference: generateTransactionReference(),
           status: TransactionStatus.SUCCESS,
+          narration: payload.narration,
         },
         queryRunner,
       );

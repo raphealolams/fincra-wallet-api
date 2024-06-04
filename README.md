@@ -7,6 +7,7 @@ documentation for Fincra Wallet API.
 - [Overview](#overview)
   - [Validations](#validations)
   - [ERD](#erd)
+  - [Test Accounts](#test-accounts)
 - [Postman Docs](#postman-docs)
 - [Prerequisites](#prerequisites)
 - [Installing](#installing)
@@ -33,14 +34,19 @@ _The transfer functionality enables fund transfer between two users within the s
 
 ## Validations
 
-- **Wallet Pin Check:**: Before initiating a transfer, the system verifies that the senders transaction pin.
-- **Avoid Self-Transfer:**: Transfers to the self is prohibited.
-- **Insufficient Balance:**: The system verifies the senders account has a balance sufficient enough to cover the transaction
-- **Duplicate transaction:**: Idempotency key was introduced to prevent duplicate transactions and ensure idempotent behavior.
+- **Wallet Pin Check:** Before initiating a transfer, the system verifies that the senders transaction pin.
+- **Avoid Self-Transfer:** Transfers to the self is prohibited.
+- **Insufficient Balance:** The system verifies the senders account has a balance sufficient enough to cover the transaction
+- **Duplicate transaction:** Idempotency key was introduced to prevent duplicate transactions and ensure idempotent behavior.
 
 ## ERD
 
 ![picture](https://res.cloudinary.com/ajilore/image/upload/f_auto,q_auto/umjjd68uvoyjrs0wkn80)
+
+## Test Accounts
+
+- **User 1:**: email (raphealolams@gmail.com) Password (wemove@1) Pin (2265)
+- **User 2:**: email (raphealolams++@gmail.com) Password (wemove@1)
 
 # Postman Docs
 

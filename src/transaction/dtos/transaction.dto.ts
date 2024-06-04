@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString, IsOptional } from 'class-validator';
 import {
   TransactionType,
   TransactionStatus,
@@ -35,4 +35,9 @@ export class CreateTransactionDto {
   @IsString()
   @IsEnum(TransactionStatus)
   status: TransactionStatus;
+
+  @IsNotEmpty()
+  @IsString()
+  @IsOptional()
+  narration?: string;
 }

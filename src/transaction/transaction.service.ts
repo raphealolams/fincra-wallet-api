@@ -126,14 +126,16 @@ export class TransactionService {
     }
   }
 
-  async transactionHistory(id, user: User): Promise<Transaction> {
+  async transactionHistory(id, user: User): Promise<Transaction | any> {
     try {
-      return await this.transactionRepo.findOneOrFail({
+      const trans = await this.transactionRepo.findOne({
         where: {
           id,
           user: { id: user.id },
         },
       });
+
+      return trans || {};
     } catch (error) {
       console.log(error);
       const { message, statusCode } = this.catchErrorMessage(error);
