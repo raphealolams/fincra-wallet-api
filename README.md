@@ -4,6 +4,9 @@ documentation for Fincra Wallet API.
 
 # Table of Contents
 
+- [Overview](#overview)
+  - [Validations](#validations)
+  - [Production Mode](#production-mode)
 - [Postman Docs](#postman-docs)
 - [Prerequisites](#prerequisites)
 - [Installing](#installing)
@@ -11,7 +14,6 @@ documentation for Fincra Wallet API.
   - [Development Mode](#development-mode)
   - [Production Mode](#production-mode)
   - [Test Cases](#test-cases)
-- [Error Documentation](#error-documentation)
 - [API Endpoint](#API-Endpoint)
   - [Auth](#auth)
     - [Signup](#signup)
@@ -23,8 +25,18 @@ documentation for Fincra Wallet API.
     - [Get Transactions History](#get-transaction-history)
   - [Transfers](#transfer)
     - [Initialize](#initialize)
-- [Advanced Requirements](#advanced-requirements)
 - [Author](#author)
+
+# Overview
+
+_The transfer functionality enables fund transfer between two users within the system._
+
+## Validations
+
+- **Wallet Pin Check:**: Before initiating a transfer, the system verifies that the senders transaction pin.
+- **Avoid Self-Transfer:**: Transfers to the self is prohibited.
+- **Insufficient Balance:**: The system verifies the senders account has a balance sufficient enough to cover the transaction
+- **Duplicate transaction:**: Idempotency key was introduced to prevent duplicate transactions and ensure idempotent behavior.
 
 # Postman Docs
 
@@ -36,7 +48,7 @@ you need to have the following installed on your machine
 
 ```
     node v11.3.0 or >
-    mysql 8.0.15 or >
+    postgresql 8.0.15 or >
 ```
 
 # Installing
@@ -44,7 +56,7 @@ you need to have the following installed on your machine
 Clone the Repository
 
 ```
-    git clone https://github.com/raphealolams/turing.git
+    git clone https://github.com/raphealolams/fincra-wallet-api
 ```
 
 Install Dependency
@@ -605,10 +617,6 @@ Install Dependency
     "code": 200
   }
   ```
-
-# Advanced Requirements
-
-### The
 
 # Author
 
